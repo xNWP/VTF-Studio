@@ -1,0 +1,3 @@
+[submodule "deps/xVTF"]
+	path = deps/xVTF
+	url = https://github.com/xNWP/xVTF
