@@ -8,7 +8,7 @@ QT       += core gui
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
-TARGET = VTF-Studio
+TARGET = vtfstudio
 TEMPLATE = app
 
 # The following define makes your compiler emit warnings if you use
@@ -25,12 +25,14 @@ DEFINES += QT_DEPRECATED_WARNINGS
 CONFIG += c++11
 
 SOURCES += \
+        channelselector.cpp \
         error.cpp \
         imagetools.cpp \
         main.cpp \
         editor.cpp
 
 HEADERS += \
+        channelselector.h \
         editor.h \
         error.h \
         imagetools.h
@@ -43,7 +45,19 @@ qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
-win32: LIBS += -L$$PWD/'../deps/xVTF/bin/Debug DLL/x64/' -lxVTF
+CONFIG(release, debug|release) {
+    contains(QT_ARCH, i386) {
+        LIBS += -L$$PWD/'../deps/xVTF/bin/Release DLL/Win32/' -lxVTF
+    } else {
+        LIBS += -L$$PWD/'../deps/xVTF/bin/Release DLL/x64/' -lxVTF
+    }
+} else {
+    contains(QT_ARCH, i386) {
+        LIBS += -L$$PWD/'../deps/xVTF/bin/Debug DLL/Win32/' -lxVTF
+    } else {
+        LIBS += -L$$PWD/'../deps/xVTF/bin/Debug DLL/x64/' -lxVTF
+    }
+}
 
 INCLUDEPATH += $$PWD/../deps/xVTF/xVTF/include
 DEPENDPATH += $$PWD/../deps/xVTF/xVTF/include
