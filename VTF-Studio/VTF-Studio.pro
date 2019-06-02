@@ -35,6 +35,7 @@ HEADERS += \
         channelselector.h \
         editor.h \
         error.h \
+        globals.h \
         imagetools.h
 
 FORMS += \

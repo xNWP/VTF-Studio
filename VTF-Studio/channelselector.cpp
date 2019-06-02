@@ -1,5 +1,7 @@
 #include "channelselector.h"
 
+#include "globals.h"
+
 #include <QDebug>
 #include <QGroupBox>
 #include <QMouseEvent>
@@ -48,7 +50,7 @@ ChannelSelector::~ChannelSelector()
 
 QSize ChannelSelector::sizeHint() const
 {
-    return QSize(200, 120);
+    return QSize(SLIDERS_MAX_WIDTH, 120);
 }
 
 bool ChannelSelector::PointContained(QPoint p, QPoint c, int size)

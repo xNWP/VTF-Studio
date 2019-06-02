@@ -8,6 +8,8 @@
 #include <QMainWindow>
 #include <QGraphicsScene>
 #include <QGraphicsView>
+#include <QSlider>
+#include <QVBoxLayout>
 
 #include <vector>
 
@@ -25,13 +27,29 @@ public:
 
 private:
     void OpenImage();
-    void CreateImageFromVecChannels();
+    void CreateImageFromVecChannels(uint * const & error = nullptr);
+    void SetupSliders();
+
+    void MipChanged(int value, QWidget* lbl);
+    void FaceChanged(int value, QWidget* lbl);
+    void FrameChanged(int value, QWidget* lbl);
+    void DepthChanged(int value, QWidget* lbl);
+
+    uint UpdateImage();
 
 private:
     void ReceiveChannels(const std::vector<ChannelLink>& channels);
 
     Ui::Editor *ui;
 
+    uint _CurrentMip;
+    uint _CurrentFrame;
+    uint _CurrentFace;
+    uint _CurrentSlice;
+
+    QVBoxLayout* _SliderLayout;
+
+    std::vector<QWidget*> _Sliders;
     ChannelSelector* _channelSelector;
     std::vector<QColor> _rawData;
     std::vector<ChannelLink> _channels;
